@@ -6,9 +6,10 @@ package com.easychat.fx.service.config;
  * description:
  */
 public interface ServerConf {
-    String ip = "120.79.175.213";
+    String ip = "192.168.1.4";
     String port = "9004";
     int netty_port = 8000;
+
     String users_url = "http://ip:port/users";
     String groups_url = "http://ip:port/groups";
 
