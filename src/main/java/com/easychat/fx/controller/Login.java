@@ -25,8 +25,8 @@ public class Login extends AbstractController {
     private TextField password;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        userNameLabel.setText("userName");
-        passwordLabel.setText("password");
+        userNameLabel.setText("userId");
+        passwordLabel.setText("carVersion");
         userName.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (KeyCode.ENTER==event.getCode()) {
                 login();
@@ -41,8 +41,8 @@ public class Login extends AbstractController {
 
     public void login(){
         LoginReq req = new LoginReq();
-        req.setUserName(userName.getText());
-        req.setPassword(password.getText());
+        req.setUserId(Long.parseLong(userName.getText()));
+        req.setCarVersion(password.getText());
         Cache.currentUser.setPassword(password.getText());
         req.setDateTime(DateUtils.now());
         Channel channel = Client.channelCache;

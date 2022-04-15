@@ -12,12 +12,15 @@ import lombok.Data;
 @Data
 public class LoginResp extends Packet {
     /** userId*/
-    private String userId;
+    private Long userId;
     private String userName;
+    private String userAvatar;
     private String token;
-    private boolean success;
 
+
+    private boolean success;
     private String reason;
+
     @Override
     public byte getCommand() {
         return Command.LOGIN_RESP;

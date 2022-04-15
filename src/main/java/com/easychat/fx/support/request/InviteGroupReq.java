@@ -16,7 +16,7 @@ public class InviteGroupReq extends Packet {
     /** 群Id*/
     private String groupId;
     /** 邀请的好友*/
-    private List<String> users;
+    private List<Long> users;
     @Override
     public byte getCommand() {
         return Command.INVITE_GROUP_REQ;

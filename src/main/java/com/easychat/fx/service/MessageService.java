@@ -14,7 +14,7 @@ public interface MessageService {
      * @param pageSize 一页的记录数
      * @return 返回消息记录
      */
-    PageResult<Packet> getLatestUserMessage(String userId, int pageSize);
+    PageResult<Packet> getLatestUserMessage(Long userId, int pageSize);
 
     /**
      * 根据群组id获取最后一页消息
@@ -30,7 +30,7 @@ public interface MessageService {
      * @param pageSize 一页的记录数
      * @return 返回消息记录
      */
-    PageResult<Packet> getEarliestUserMessage(String userId, int pageSize);
+    PageResult<Packet> getEarliestUserMessage(Long userId, int pageSize);
 
     /**
      * 根据群组id获取最早一页消息
@@ -47,7 +47,7 @@ public interface MessageService {
      * @param pageSize 一页的记录数
      * @return 返回消息记录
      */
-    PageResult<Packet> getLastUserMessage(String userId, int currentPage, int pageSize);
+    PageResult<Packet> getLastUserMessage(Long userId, int currentPage, int pageSize);
 
     /**
      * 根据群组id获取上一页消息
@@ -65,7 +65,7 @@ public interface MessageService {
      * @param pageSize 一页的记录数
      * @return 返回消息记录
      */
-    PageResult<Packet> getNextUserMessage(String userId, int currentPage, int pageSize);
+    PageResult<Packet> getNextUserMessage(Long userId, int currentPage, int pageSize);
 
     /**
      * 根据群组id获取下一页消息
@@ -81,7 +81,7 @@ public interface MessageService {
      * @param userId 用户id
      * @param packet 消息体
      */
-    void writeUserMessage(String userId, Packet packet);
+    void writeUserMessage(Long userId, Packet packet);
     
     /**
      * 写入消息到群组本地记录
@@ -96,12 +96,12 @@ public interface MessageService {
      * @param userId
      * @return
      */
-    List<Packet> getLastUserCacheMessage(String userId, int pageSize);
+    List<Packet> getLastUserCacheMessage(Long userId, int pageSize);
 
     /**
      * 获取最后几条用户聊天记录
      * @param userId
      * @return
      */
-    List<Packet> getLastGroupCacheMessage(String userId, int pageSize);
+    List<Packet> getLastGroupCacheMessage(Long userId, int pageSize);
 }

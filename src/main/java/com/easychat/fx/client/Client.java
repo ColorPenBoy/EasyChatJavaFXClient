@@ -91,8 +91,8 @@ public class Client extends Application {
 
     private static void reLogin(Channel channelCache) {
         LoginReq req = new LoginReq();
-        req.setUserName(Cache.currentUser.getUserName());
-        req.setPassword(Cache.currentUser.getPassword());
+        req.setUserId(Cache.currentUser.getUserId());
+        req.setCarVersion(Cache.currentUser.getCarVersion());
         req.setDateTime(DateUtils.now());
         System.out.println("重新登录！");
         System.out.println(channelCache.id());

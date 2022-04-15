@@ -13,7 +13,7 @@ import lombok.Data;
  */
 @Data
 public class MessageResp extends Packet {
-    private String sender;
+    private Long sender;
     private String senderName;
     private String message;
     /**

@@ -287,10 +287,10 @@ public class Main extends AbstractController {
 
     public void showMessage() {
         errorMsg.setText("");
-        Set<String> userIds = Cache.userMessageMap.keySet();
+        Set<Long> userIds = Cache.userMessageMap.keySet();
         Set<String> groupIds = Cache.groupMessageMap.keySet();
         Map<String, Object> userGroupMap = new HashMap<>();
-        for (String userId : userIds) {
+        for (Long userId : userIds) {
             Packet last = Cache.userMessageMap.get(userId).getLast();
             if (last != null && last.getDateTime() != null) {
                 User user = Cache.cacheUserMap.get(userId);
@@ -344,7 +344,7 @@ public class Main extends AbstractController {
             }
             
             if (Constants.message_type_user.equals(messageType)) {
-                String userId = Cache.currentUser.getUserId();
+                Long userId = Cache.currentUser.getUserId();
                 List<User> users = UserService.getInstance().getFriendByUserId(userId, newData);
                 ObservableList userList = listView.getItems();
                 userList.clear();
@@ -352,7 +352,7 @@ public class Main extends AbstractController {
                     userList.addAll(users);
                 }
             } else if (Constants.message_type_group.equals(messageType)){
-                String userId = Cache.currentUser.getUserId();
+                Long userId = Cache.currentUser.getUserId();
                 List<Group> groups = UserService.getInstance().getGroupByUserId(userId, newData);
                 ObservableList groupList = listView.getItems();
                 groupList.clear();
@@ -426,7 +426,7 @@ public class Main extends AbstractController {
                 Cache.allMessageNum.getAndAdd(-num);
             }
             Cache.userMessageNumMap.remove(user.getUserId());
-            showMessageViesList(messageListView, user.getUserId(), Constants.message_type_user);
+            showMessageViesList(messageListView, String.valueOf(user.getUserId()), Constants.message_type_user);
             showUserGroupList(Constants.message_type_user);
         } else if (o instanceof Group){
             Group group = (Group) o; 
@@ -491,9 +491,9 @@ public class Main extends AbstractController {
                 packets.addAll(packets1);
             }
             if (packets.size() == 0) {
-                packets.addAll(MessageService.DEFAULT.getLastUserCacheMessage(id, Constants.CACHE_PAGESIZE));
+                packets.addAll(MessageService.DEFAULT.getLastUserCacheMessage(Long.parseLong(id), Constants.CACHE_PAGESIZE));
                 if (packets.size() != 0) {
-                    Cache.userMessageMap.put(id, packets);
+                    Cache.userMessageMap.put(Long.parseLong(id), packets);
                 }
                 
             }
@@ -503,7 +503,7 @@ public class Main extends AbstractController {
                 packets.addAll(packets1);
             }
             if (packets.size() == 0) {
-                packets.addAll(MessageService.DEFAULT.getLastUserCacheMessage(id, Constants.CACHE_PAGESIZE));
+                packets.addAll(MessageService.DEFAULT.getLastUserCacheMessage(Long.parseLong(id), Constants.CACHE_PAGESIZE));
                 if (packets.size() != 0) {
                     Cache.groupMessageMap.put(id, packets);
                 }

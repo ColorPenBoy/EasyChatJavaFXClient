@@ -38,7 +38,7 @@ public class CreateGroup extends AbstractController {
         req.setGroupName(textField.getText());
         req.setDateTime(DateUtils.now());
         ObservableList items = confirmView.getItems();
-        List<String> users = new ArrayList<>();
+        List<Long> users = new ArrayList<>();
         for (Object obj : items) {
             User user = (User) obj;
             users.add(user.getUserId());

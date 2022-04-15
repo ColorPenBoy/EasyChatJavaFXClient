@@ -28,7 +28,7 @@ public class FileServiceImpl implements FileService {
      * @return 按照时间先后顺序返回map， key : 文件绝对路径 value ：用户的本文件的消息记录数。
      */
     @Override
-    public List<String> getUserMessageFiles(String currentUser, String userId, String userType) {
+    public List<String> getUserMessageFiles(Long currentUser, Long userId, String userType) {
         List<String> fileList = new ArrayList<>();
         File file = new File(Constants.PATH);
         if (!file.exists()) {

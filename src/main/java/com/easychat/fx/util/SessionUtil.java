@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * description:
  */
 public class SessionUtil {
-    private static Map<String, Channel> userChannelMap = new ConcurrentHashMap<>();
+    private static Map<Long, Channel> userChannelMap = new ConcurrentHashMap<>();
     
     public static boolean hasLogin(Channel channel) {
        return channel.attr(Attributes.SESSION).get() != null;

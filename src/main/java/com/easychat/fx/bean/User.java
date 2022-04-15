@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    private String userId;
+    private Long userId;
+    private String carVersion;
     private String userName;
     private String password;
     private String nickName;

@@ -27,25 +27,29 @@ public class UserService {
 
     private UserService() {
     }
-    public List<User> getFriendByUserId(String userId) {
+    public List<User> getFriendByUserId(Long userId) {
         return getFriendByUserId(userId,false);
     }
     
-    public List<User> getFriendByUserId(String userId, boolean newData) {
+    public List<User> getFriendByUserId(Long userId, boolean newData) {
         List<User> users;
         if (Cache.cacheUsers.size() == 0 || newData) {
             String url = ServerConf.users_url.replace("ip", ServerConf.ip).replace("port", ServerConf.port);
 
             String usersJson = OkHttpUtils.get(url, null);
             Result result = JSON.parseObject(usersJson, Result.class);
-            JSONArray array = (JSONArray) result.getData();
-            users = array.toJavaList(User.class);
-            Cache.cacheUsers.clear();
-            if (users != null) {
-                Cache.cacheUsers.addAll(users);
-                Cache.cacheUserMap.clear();
-                for (User user : users) {
-                    Cache.cacheUserMap.put(user.getUserId(), user);
+            if (result == null) {
+                users = new ArrayList<>(Cache.cacheUsers);
+            } else {
+                JSONArray array = (JSONArray) result.getData();
+                users = array.toJavaList(User.class);
+                Cache.cacheUsers.clear();
+                if (users != null) {
+                    Cache.cacheUsers.addAll(users);
+                    Cache.cacheUserMap.clear();
+                    for (User user : users) {
+                        Cache.cacheUserMap.put(user.getUserId(), user);
+                    }
                 }
             }
         } else {
@@ -54,29 +58,49 @@ public class UserService {
         return users;
     }
 
-    public List<Group> getGroupByUserId(String userId) {
+    public List<Group> getGroupByUserId(Long userId) {
         return getGroupByUserId(userId, false);
     }
-    public List<Group> getGroupByUserId(String userId, boolean newData) {
-        List<Group> groups;
-        if (Cache.cacheGroups.size() == 0 || newData) {
-            String url = ServerConf.groups_url.replace("ip", ServerConf.ip).replace("port", ServerConf.port);
+    public List<Group> getGroupByUserId(Long userId, boolean newData) {
+        Group group1 = new Group();
+        group1.setGroupId("1");
+        group1.setGroupName("测试群1");
+        group1.setMainUserId(1000000000L);
 
-            String groupsJson = OkHttpUtils.get(url, null);
-            Result result = JSON.parseObject(groupsJson, Result.class);
-            JSONArray array = (JSONArray) result.getData();
-            groups = array.toJavaList(Group.class);
-            if (groups!= null) {
-                Cache.cacheGroups.clear();
-                Cache.cacheGroups.addAll(groups);
-                Cache.cacheGroupMap.clear();
-                for (Group group : groups) {
-                    Cache.cacheGroupMap.put(group.getGroupId(), group);
-                }
-            }
-        } else {
-            groups = new ArrayList<>( Cache.cacheGroups);
-        }
+
+        Group group2 = new Group();
+        group2.setGroupId("2");
+        group2.setGroupName("测试群2");
+        group2.setMainUserId(1000000000L);
+
+        Group group3 = new Group();
+        group3.setGroupId("3");
+        group3.setGroupName("测试群3");
+        group3.setMainUserId(1000000000L);
+
+        List<Group> groups = new ArrayList<>();
+        groups.add(group1);
+        groups.add(group2);
+        groups.add(group3);
+
+//        if (Cache.cacheGroups.size() == 0 || newData) {
+//            String url = ServerConf.groups_url.replace("ip", ServerConf.ip).replace("port", ServerConf.port);
+//
+//            String groupsJson = OkHttpUtils.get(url, null);
+//            Result result = JSON.parseObject(groupsJson, Result.class);
+//            JSONArray array = (JSONArray) result.getData();
+//            groups = array.toJavaList(Group.class);
+//            if (groups!= null) {
+//                Cache.cacheGroups.clear();
+//                Cache.cacheGroups.addAll(groups);
+//                Cache.cacheGroupMap.clear();
+//                for (Group group : groups) {
+//                    Cache.cacheGroupMap.put(group.getGroupId(), group);
+//                }
+//            }
+//        } else {
+//            groups = new ArrayList<>( Cache.cacheGroups);
+//        }
         return groups;
     }
     

@@ -11,10 +11,12 @@ import lombok.Data;
  */
 @Data
 public class LoginReq extends Packet {
-    /** 账号*/
-    private String userName;
-    /** 密码*/
-    private String password;
+    /** 用户id **/
+    private Long userId;
+
+    /** 车型id **/
+    private String carVersion;
+
     @Override
     public byte getCommand() {
         return Command.LOGIN_RRQ;

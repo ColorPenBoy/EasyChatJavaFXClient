@@ -55,7 +55,7 @@ public class MessageList extends AbstractController {
         lable.setAlignment(Pos.CENTER);
         if (Constants.message_type_user.equals(messageType)) {
             User messageUser = messageCache.getMessageUser();
-            user = messageUser.getUserId();
+            user = String.valueOf(messageUser.getUserId());
             userTpe = Constants.message_type_user;
             lable.setText("与" + messageUser.getUserName() + "的聊天记录");
         } else if (Constants.message_type_group.equals(messageType)){
@@ -80,7 +80,7 @@ public class MessageList extends AbstractController {
         clearErrorMsg();
         PageResult<Packet> pageResult;
         if (Constants.message_type_user.equals(userTpe)) {
-            pageResult = service.getNextUserMessage(user, currentPage + 1, Constants.PAGESIZE);
+            pageResult = service.getNextUserMessage(Long.parseLong(user), currentPage + 1, Constants.PAGESIZE);
         } else {
             pageResult = service.getNextGroupMessage(user, currentPage + 1, Constants.PAGESIZE);
         }
@@ -126,7 +126,7 @@ public class MessageList extends AbstractController {
         clearErrorMsg();
         PageResult<Packet> pageResult;
         if (Constants.message_type_user.equals(userTpe)) {
-            pageResult = service.getNextUserMessage(user, currentPage - 1, Constants.PAGESIZE);
+            pageResult = service.getNextUserMessage(Long.parseLong(user), currentPage - 1, Constants.PAGESIZE);
         } else {
             pageResult = service.getNextGroupMessage(user, currentPage - 1, Constants.PAGESIZE);
         }
@@ -140,7 +140,7 @@ public class MessageList extends AbstractController {
         clearErrorMsg();
         PageResult<Packet> pageResult;
         if (Constants.message_type_user.equals(userTpe)) {
-            pageResult = service.getEarliestUserMessage(user, Constants.PAGESIZE);
+            pageResult = service.getEarliestUserMessage(Long.parseLong(user), Constants.PAGESIZE);
         } else {
             pageResult = service.getEarliestGroupMessage(user, Constants.PAGESIZE);
         }
@@ -154,7 +154,7 @@ public class MessageList extends AbstractController {
         clearErrorMsg();
         PageResult<Packet> pageResult;
         if (Constants.message_type_user.equals(userTpe)) {
-            pageResult = service.getLatestUserMessage(user, Constants.PAGESIZE);
+            pageResult = service.getLatestUserMessage(Long.parseLong(user), Constants.PAGESIZE);
         } else {
             pageResult = service.getLatestGroupMessage(user, Constants.PAGESIZE);
         }

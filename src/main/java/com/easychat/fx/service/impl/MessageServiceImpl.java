@@ -36,7 +36,7 @@ public class MessageServiceImpl implements MessageService {
      * @return 返回消息记录
      */
     @Override
-    public PageResult<Packet> getLatestUserMessage(String userId, int pageSize) {
+    public PageResult<Packet> getLatestUserMessage(Long userId, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
         List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), userId, Constants.message_type_user);
@@ -109,7 +109,7 @@ public class MessageServiceImpl implements MessageService {
     public PageResult<Packet> getLatestGroupMessage(String groupId, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
-        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), groupId, Constants.message_type_group);
+        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(groupId), Constants.message_type_group);
         int size = files.size();
         String s = files.get(size-1);
         File file = new File(s);
@@ -135,7 +135,7 @@ public class MessageServiceImpl implements MessageService {
      * @return 返回消息记录
      */
     @Override
-    public PageResult<Packet> getEarliestUserMessage(String userId, int pageSize) {
+    public PageResult<Packet> getEarliestUserMessage(Long userId, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
         List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), userId, Constants.message_type_user);
@@ -165,7 +165,7 @@ public class MessageServiceImpl implements MessageService {
     public PageResult<Packet> getEarliestGroupMessage(String groupId, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
-        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), groupId, Constants.message_type_group);
+        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(groupId), Constants.message_type_group);
         int size = files.size();
         String s = files.get(size-1);
         File file = new File(s);
@@ -190,7 +190,7 @@ public class MessageServiceImpl implements MessageService {
      * @return 返回消息记录
      */
     @Override
-    public PageResult<Packet> getLastUserMessage(String userId, int currentPage, int pageSize) {
+    public PageResult<Packet> getLastUserMessage(Long userId, int currentPage, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
         List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), userId, Constants.message_type_user);
@@ -221,7 +221,7 @@ public class MessageServiceImpl implements MessageService {
     public PageResult<Packet> getLastGroupMessage(String groupId, int currentPage, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
-        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), groupId, Constants.message_type_group);
+        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(groupId), Constants.message_type_group);
         int size = files.size();
         String s = files.get(size-1);
         File file = new File(s);
@@ -246,7 +246,7 @@ public class MessageServiceImpl implements MessageService {
      * @return 返回消息记录
      */
     @Override
-    public PageResult<Packet> getNextUserMessage(String userId, int currentPage, int pageSize) {
+    public PageResult<Packet> getNextUserMessage(Long userId, int currentPage, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
         List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), userId, Constants.message_type_user);
@@ -277,7 +277,7 @@ public class MessageServiceImpl implements MessageService {
     public PageResult<Packet> getNextGroupMessage(String groupId, int currentPage, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
-        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), groupId, Constants.message_type_group);
+        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(groupId), Constants.message_type_group);
         int size = files.size();
         String s = files.get(size-1);
         File file = new File(s);
@@ -300,7 +300,7 @@ public class MessageServiceImpl implements MessageService {
      * @param packet 消息体
      */
     @Override
-    public void writeUserMessage(String userId, Packet packet) {
+    public void writeUserMessage(Long userId, Packet packet) {
         List<String> files = FileService.DEFAULT.getUserMessageFiles(Cache.currentUser.getUserId(), userId, Constants.message_type_user);
         String s = files.get(files.size()-1);
         FileService.DEFAULT.writeMessage(new File(s), JSON.toJSONString(packet));
@@ -313,13 +313,13 @@ public class MessageServiceImpl implements MessageService {
      */
     @Override
     public void writeGroupMessage(String groupId, Packet packet) {
-        List<String> files = FileService.DEFAULT.getUserMessageFiles(Cache.currentUser.getUserId(), groupId, Constants.message_type_group);
+        List<String> files = FileService.DEFAULT.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(groupId), Constants.message_type_group);
         String s = files.get(files.size()-1);
         FileService.DEFAULT.writeMessage(new File(s), JSON.toJSONString(packet));
     }
 
     @Override
-    public List<Packet> getLastUserCacheMessage(String userId, int pageSize) {
+    public List<Packet> getLastUserCacheMessage(Long userId, int pageSize) {
         FileService service = FileService.DEFAULT;
         List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), userId, Constants.message_type_user);
         return getLastCacheMessage(pageSize, service, files);
@@ -361,9 +361,9 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Packet> getLastGroupCacheMessage(String groupId, int pageSize) {
+    public List<Packet> getLastGroupCacheMessage(Long userId, int pageSize) {
         FileService service = FileService.DEFAULT;
-        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), groupId, Constants.message_type_group);
+        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), userId, Constants.message_type_group);
         return getLastCacheMessage(pageSize, service, files);
     }
 

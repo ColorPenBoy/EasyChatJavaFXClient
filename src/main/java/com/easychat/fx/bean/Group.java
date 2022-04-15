@@ -12,7 +12,7 @@ import lombok.Data;
 public class Group {
     private String groupId;
     private String groupName;
-    private String mainUserId;
+    private Long mainUserId;
     
     
     @Override

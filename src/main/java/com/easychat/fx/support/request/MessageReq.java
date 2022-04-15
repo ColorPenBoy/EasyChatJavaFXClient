@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public class MessageReq extends Packet {
     /** 消息接收方*/
-    private String receiver;
+    private Long receiver;
     /** 消息内容*/
     private String message;
     /**
