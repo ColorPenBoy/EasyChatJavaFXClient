@@ -8,7 +8,9 @@ import com.easychat.fx.support.request.InviteGroupReq;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,15 +18,19 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class InviteGroup extends AbstractController {
+
+
     @FXML
     private ChoiceBox choiceBox;
+
     @FXML
-    private ListView selectView;
+    private TextField userIdTextField;
     @FXML
-    private ListView confirmView;
+    private Label userIdLabel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        userIdTextField.setText("1000000000");
     }
 
     public void commit() {
@@ -37,34 +43,11 @@ public class InviteGroup extends AbstractController {
         Group group = (Group) choiceBox.getItems().get(selectedIndex);
         req.setGroupId(group.getGroupId());
         req.setDateTime(DateUtils.now());
-        ObservableList items = confirmView.getItems();
+
         List<Long> users = new ArrayList<>();
-        for (Object obj : items) {
-            User user = (User) obj;
-            users.add(user.getUserId());
-        }
+        users.add(Long.parseLong(userIdTextField.getText()));
         req.setUsers(users);
 
         Client.channelCache.writeAndFlush(req);
-    }
-
-    public void selectViewClicked() {
-        int selectedIndex = selectView.getSelectionModel().getSelectedIndex();
-        if (selectedIndex == -1) {
-            return;
-        }
-        Object o = selectView.getItems().get(selectedIndex);
-        ObservableList items = confirmView.getItems();
-        if (!items.contains(o)) {
-            confirmView.getItems().add(o);
-        }
-    }
-
-    public void confirmViewClicked() {
-        int selectedIndex = confirmView.getSelectionModel().getSelectedIndex();
-        if (selectedIndex == -1) {
-            return;
-        }
-        confirmView.getItems().remove(selectedIndex);
     }
 }

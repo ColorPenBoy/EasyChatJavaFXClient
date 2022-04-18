@@ -12,9 +12,8 @@
       <Label layoutX="14.0" layoutY="14.0" text="选择群" />
       <Label fx:id="errorMsg" layoutX="8.0" layoutY="89.0" prefHeight="113.0" prefWidth="99.0" />
       <Button layoutX="8.0" layoutY="212.0" mnemonicParsing="false" onAction="#commit" prefHeight="27.0" prefWidth="107.0" text="commit" />
-      <ListView layoutX="126.0" layoutY="27.0" prefHeight="218.0" prefWidth="133.0" fx:id="selectView" onMouseClicked="#selectViewClicked"/>
-      <ListView layoutX="285.0" layoutY="27.0" prefHeight="218.0" prefWidth="133.0" fx:id="confirmView" onMouseClicked="#confirmViewClicked"/>
-      <Label layoutX="137.0" layoutY="7.0" text="选择好友" />
-      <Label layoutX="300.0" layoutY="7.0" text="选好的好友" />
+
+      <Label fx:id="userIdLabel" layoutX="15.0" layoutY="90.0" text="用户ID" />
+      <TextField fx:id="userIdTextField" layoutX="15.0" layoutY="120.0" />
    </children>
 </AnchorPane>

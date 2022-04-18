@@ -27,11 +27,13 @@ public class Login extends AbstractController {
     public void initialize(URL location, ResourceBundle resources) {
         userNameLabel.setText("userId");
         passwordLabel.setText("carVersion");
+        userName.setText("1000000000");
         userName.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (KeyCode.ENTER==event.getCode()) {
                 login();
             }
         });
+        password.setText("C0.0101");
         password.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (KeyCode.ENTER==event.getCode()) {
                 login();
@@ -44,15 +46,6 @@ public class Login extends AbstractController {
         req.setUserId(Long.parseLong(userName.getText()));
         req.setCarVersion(password.getText());
         Cache.currentUser.setPassword(password.getText());
-        req.setDateTime(DateUtils.now());
-        Channel channel = Client.channelCache;
-        channel.writeAndFlush(req);
-    }
-    
-    public void register(){
-        RegisterReq req = new RegisterReq();
-        req.setUserName(userName.getText());
-        req.setPassword(password.getText());
         req.setDateTime(DateUtils.now());
         Channel channel = Client.channelCache;
         channel.writeAndFlush(req);

@@ -36,7 +36,6 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Main extends AbstractController {
     private static KeyCode inputLast = null;
@@ -53,20 +52,14 @@ public class Main extends AbstractController {
     private ListView<Object> messageListView;
     @FXML
     private Label label;
-    @FXML
-    private Button userList;
-    @FXML
-    private Button groupList;
-    @FXML
-    private Button addUser;
+
     @FXML
     private Button createGroup;
     @FXML
     private Button inviteGroup;
     @FXML
     private ListView groupMember;
-    @FXML
-    private Button message;
+
     @FXML
     private Label remind;
     @FXML
@@ -155,10 +148,8 @@ public class Main extends AbstractController {
                 if (o instanceof TextArea) {
                     return;
                 }
-
                 ImageView o1 = (ImageView) o;
                 o1.setImage(null);
-
             }
         });
     }
@@ -275,46 +266,41 @@ public class Main extends AbstractController {
 
     }
 
-    public void showUserList() {
-        errorMsg.setText("");
-        showUserGroupList(Constants.message_type_user);
-    }
-
-    public void showGroupList() {
-        errorMsg.setText("");
-        showUserGroupList(Constants.message_type_group);
-    }
-
-    public void showMessage() {
-        errorMsg.setText("");
-        Set<Long> userIds = Cache.userMessageMap.keySet();
-        Set<String> groupIds = Cache.groupMessageMap.keySet();
-        Map<String, Object> userGroupMap = new HashMap<>();
-        for (Long userId : userIds) {
-            Packet last = Cache.userMessageMap.get(userId).getLast();
-            if (last != null && last.getDateTime() != null) {
-                User user = Cache.cacheUserMap.get(userId);
-                if (user == null && Cache.system.getUserId().equals(userId)) {
-                    user = Cache.system;
-                }
-                userGroupMap.put(last.getDateTime(), user);
-            }
-        }
-
-        for (String groupId : groupIds) {
-            Packet last = Cache.groupMessageMap.get(groupId).getLast();
-            if (last != null && last.getDateTime() != null) {
-                Group group = Cache.cacheGroupMap.get(groupId);
-                userGroupMap.put(last.getDateTime(), group);
-            }
-        }
-
-        List<Object> userGroups = userGroupMap.keySet().stream().sorted(String::compareTo).map(userGroupMap::get).collect(Collectors.toList());
-        ObservableList userListViewItems = userListView.getItems();
-        userListViewItems.clear();
-        Collections.reverse(userGroups);
-        userListViewItems.addAll(userGroups);
-    }
+//    public void showGroupList() {
+//        errorMsg.setText("");
+//        showUserGroupList(Constants.message_type_group);
+//    }
+//
+//    public void showMessage() {
+//        errorMsg.setText("");
+//        Set<Long> userIds = Cache.userMessageMap.keySet();
+//        Set<String> groupIds = Cache.groupMessageMap.keySet();
+//        Map<String, Object> userGroupMap = new HashMap<>();
+//        for (Long userId : userIds) {
+//            Packet last = Cache.userMessageMap.get(userId).getLast();
+//            if (last != null && last.getDateTime() != null) {
+//                User user = Cache.cacheUserMap.get(userId);
+//                if (user == null && Cache.system.getUserId().equals(userId)) {
+//                    user = Cache.system;
+//                }
+//                userGroupMap.put(last.getDateTime(), user);
+//            }
+//        }
+//
+//        for (String groupId : groupIds) {
+//            Packet last = Cache.groupMessageMap.get(groupId).getLast();
+//            if (last != null && last.getDateTime() != null) {
+//                Group group = Cache.cacheGroupMap.get(groupId);
+//                userGroupMap.put(last.getDateTime(), group);
+//            }
+//        }
+//
+//        List<Object> userGroups = userGroupMap.keySet().stream().sorted(String::compareTo).map(userGroupMap::get).collect(Collectors.toList());
+//        ObservableList userListViewItems = userListView.getItems();
+//        userListViewItems.clear();
+//        Collections.reverse(userGroups);
+//        userListViewItems.addAll(userGroups);
+//    }
 
     public static void showUserGroupList(String messageType) {
         showUserGroupList(messageType, false);
@@ -325,33 +311,33 @@ public class Main extends AbstractController {
         UiBaseService.INSTANCE.runTaskInFxThread(()->{
             Stage main = Cache.ControllerMap.get("main");
             ListView listView = (ListView) main.getScene().getRoot().lookup("#userListView");
-            int num = Cache.allMessageNum.get();
-            Button message = (Button) main.getScene().getRoot().lookup("#message");
-            if (num > 0) {
-                if (num > 99) {
-                    num = 99;
-                }
-                message.setText("消息 "+num);
-                message.setTextFill(Color.RED);
-                message.setAlignment(Pos.BASELINE_LEFT);
-            } else if (num == 0) {
-                message.setTextFill(Color.BLACK);
-                message.setText("消息");
-            } else {
-                message.setTextFill(Color.BLACK);
-                message.setText("消息");
-                Cache.allMessageNum.set(0);
-            }
+//            int num = Cache.allMessageNum.get();
+//            Button message = (Button) main.getScene().getRoot().lookup("#message");
+//            if (num > 0) {
+//                if (num > 99) {
+//                    num = 99;
+//                }
+//                message.setText("消息 "+num);
+//                message.setTextFill(Color.RED);
+//                message.setAlignment(Pos.BASELINE_LEFT);
+//            } else if (num == 0) {
+//                message.setTextFill(Color.BLACK);
+//                message.setText("消息");
+//            } else {
+//                message.setTextFill(Color.BLACK);
+//                message.setText("消息");
+//                Cache.allMessageNum.set(0);
+//            }
             
-            if (Constants.message_type_user.equals(messageType)) {
-                Long userId = Cache.currentUser.getUserId();
-                List<User> users = UserService.getInstance().getFriendByUserId(userId, newData);
-                ObservableList userList = listView.getItems();
-                userList.clear();
-                if (users != null) {
-                    userList.addAll(users);
-                }
-            } else if (Constants.message_type_group.equals(messageType)){
+//            if (Constants.message_type_user.equals(messageType)) {
+//                Long userId = Cache.currentUser.getUserId();
+//                List<User> users = UserService.getInstance().getFriendByUserId(userId, newData);
+//                ObservableList userList = listView.getItems();
+//                userList.clear();
+//                if (users != null) {
+//                    userList.addAll(users);
+//                }
+//            } else if (Constants.message_type_group.equals(messageType)){
                 Long userId = Cache.currentUser.getUserId();
                 List<Group> groups = UserService.getInstance().getGroupByUserId(userId, newData);
                 ObservableList groupList = listView.getItems();
@@ -359,18 +345,9 @@ public class Main extends AbstractController {
                 if (groups != null) {
                     groupList.addAll(groups);
                 }
-            }
+//            }
         });
         
-    }
-
-    public void addUser() {
-        errorMsg.setText("");
-        UiBaseService.INSTANCE.runTaskInFxThread(()->{
-            Stage addUser = Cache.ControllerMap.get("addUser");
-            addUser.show();
-            addUser.toFront();
-        });
     }
 
     public void createGroup() {
@@ -390,13 +367,6 @@ public class Main extends AbstractController {
         errorMsg.setText("");
         UiBaseService.INSTANCE.runTaskInFxThread(()->{
             Stage inviteGroup = Cache.ControllerMap.get("inviteGroup");
-            ListView selectView = (ListView) inviteGroup.getScene().getRoot().lookup("#selectView");
-            List<User> users = UserService.getInstance().getFriendByUserId(Cache.currentUser.getUserId());
-            selectView.getItems().clear();
-            if (users != null) {
-                selectView.getItems().addAll(users);
-            }
-
             ChoiceBox choiceBox = (ChoiceBox)inviteGroup.getScene().getRoot().lookup("#choiceBox");
             List<Group> groups = UserService.getInstance().getGroupByUserId(Cache.currentUser.getUserId());
             choiceBox.getItems().clear();
@@ -429,7 +399,7 @@ public class Main extends AbstractController {
             showMessageViesList(messageListView, String.valueOf(user.getUserId()), Constants.message_type_user);
             showUserGroupList(Constants.message_type_user);
         } else if (o instanceof Group){
-            Group group = (Group) o; 
+            Group group = (Group) o;
             text = group.getGroupName();
             Cache.messageCache.setMessageType(Constants.message_type_group);
             Cache.messageCache.setMessageGroup(group);
@@ -444,7 +414,7 @@ public class Main extends AbstractController {
         } else {
             text = "某某";
         }
-        label.setText("与" + text + "聊天中");
+        label.setText(text);
         System.out.println("与" + text + "聊天中");
     }
     

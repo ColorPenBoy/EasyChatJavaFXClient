@@ -1,5 +1,6 @@
 package com.easychat.fx.client.handle;
 
+import com.easychat.fx.bean.Group;
 import com.easychat.fx.bean.User;
 import com.easychat.fx.controller.Cache;
 import com.easychat.fx.service.UserService;
@@ -37,14 +38,17 @@ public class LoginRespHandler extends SimpleChannelInboundHandler<LoginResp> {
                 Cache.currentUser.setUserId(msg.getUserId());
                 Cache.currentUser.setUserName(msg.getUserName());
                 Cache.currentUser.setToken(msg.getToken());
-                ListView userListView = (ListView)main.getScene().getRoot().lookup("#userListView");
-                List<User> users = UserService.getInstance().getFriendByUserId(msg.getUserId());
-                ObservableList userList = userListView.getItems();
-                userList.clear();
-                if (users != null) {
-                    userList.addAll(users);
+
+                ListView listView = (ListView) main.getScene().getRoot().lookup("#userListView");
+                Long userId = Cache.currentUser.getUserId();
+                List<Group> groups = UserService.getInstance().getGroupByUserId(userId, false);
+                ObservableList groupList = listView.getItems();
+                groupList.clear();
+                if (groups != null) {
+                    groupList.addAll(groups);
                 }
-                main.setTitle("撩骚app       " + msg.getUserName() + " --在线， id: " + msg.getUserId());
+
+                main.setTitle("车友群       " + msg.getUserName() + " --在线， id: " + msg.getUserId());
                 main.show();
             });
 

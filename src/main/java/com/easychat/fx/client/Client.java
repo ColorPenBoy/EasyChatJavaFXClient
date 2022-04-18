@@ -139,21 +139,6 @@ public class Client extends Application {
             }
         });
 
-        Stage addUser = new Stage();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("addUser.fxml"));
-        addUser.setTitle("addUser");
-        addUser.setScene(new Scene(root));
-        Cache.ControllerMap.put("addUser", addUser);
-        addUser.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Label label = (Label)addUser.getScene().getRoot().lookup("#errorMsg");
-                TextField textField = (TextField)addUser.getScene().getRoot().lookup("#textField");
-                label.setText(null);
-                textField.setText(null);
-            }
-        });
-
         Stage createGroup = new Stage();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("createGroup.fxml"));
         createGroup.setTitle("createGroup");
@@ -206,12 +191,6 @@ public class Client extends Application {
                 System.exit(0);
             }
         });
-
-        Stage updatePassword = new Stage();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("updatePassword.fxml"));
-        updatePassword.setTitle("updatePassword");
-        updatePassword.setScene(new Scene(root));
-        Cache.ControllerMap.put("updatePassword", updatePassword);
 
         Stage login = new Stage();
         root = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
