@@ -5,11 +5,6 @@ import com.easychat.fx.service.impl.FileServiceImpl;
 import java.io.File;
 import java.util.List;
 
-/**
- * @author Zed
- * date: 2019/09/02.
- * description:
- */
 public interface FileService {
     FileService DEFAULT = FileServiceImpl.getInstance();
     /**

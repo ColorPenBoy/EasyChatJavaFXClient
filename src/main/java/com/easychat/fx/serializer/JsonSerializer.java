@@ -2,11 +2,6 @@ package com.easychat.fx.serializer;
 
 import com.alibaba.fastjson.JSON;
 
-/**
- * @author Zed
- * date: 2019/08/19.
- * description:
- */
 public class JsonSerializer implements Serializer {
     @Override
     public byte getSerializerAlgorithm() {

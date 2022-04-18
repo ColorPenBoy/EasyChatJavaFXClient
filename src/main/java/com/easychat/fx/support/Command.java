@@ -1,10 +1,5 @@
 package com.easychat.fx.support;
 
-/**
- * @author Zed
- * date: 2019/08/19.
- * description:
- */
 public interface Command {
     /** 登录*/
     byte LOGIN_RRQ = 1;

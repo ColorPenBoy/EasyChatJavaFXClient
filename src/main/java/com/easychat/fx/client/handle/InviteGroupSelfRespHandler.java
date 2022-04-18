@@ -9,11 +9,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import javafx.stage.Stage;
 
-/**
- * @author Zed
- * date: 2019/08/20.
- * description:
- */
 @ChannelHandler.Sharable
 public class InviteGroupSelfRespHandler extends SimpleChannelInboundHandler<InviteGroupSelfResp> {
     private InviteGroupSelfRespHandler() {}

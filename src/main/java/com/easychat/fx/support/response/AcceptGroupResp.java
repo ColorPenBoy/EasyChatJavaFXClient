@@ -8,11 +8,6 @@ import com.easychat.fx.support.Command;
 import com.easychat.fx.support.Packet;
 import lombok.Data;
 
-/**
- * @author Zed
- * date: 2019/08/19.
- * description:
- */
 @Data
 public class AcceptGroupResp extends Packet {
     private String acceptUser;

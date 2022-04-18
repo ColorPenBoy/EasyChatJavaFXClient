@@ -18,11 +18,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/**
- * @author Zed
- * date: 2019/09/02.
- * description:
- */
 public class MessageServiceImpl implements MessageService {
     private static MessageService ourInstance = new MessageServiceImpl();
 

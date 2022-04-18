@@ -6,11 +6,6 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * @author Zed
- * date: 2019/08/19.
- * description:
- */
 @Data
 public class CreateGroupReq extends Packet {
     /** 创建的群名*/

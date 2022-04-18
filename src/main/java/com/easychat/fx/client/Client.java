@@ -31,11 +31,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Zed
- * date: 2019/08/19.
- * description:
- */
 public class Client extends Application {
     public static volatile Channel channelCache = null;
     public static void main(String[] args) {

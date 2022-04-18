@@ -17,11 +17,6 @@ import javafx.stage.Stage;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * @author Zed
- * date: 2019/08/20.
- * description:
- */
 @ChannelHandler.Sharable
 public class GroupMessageRespHandler extends SimpleChannelInboundHandler<GroupMessageResp> {
     private GroupMessageRespHandler() {}

@@ -7,8 +7,6 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @author Zed
- * date: 2019/08/19.
  * description: 服务端发送给被邀请方的响应
  */
 @Data

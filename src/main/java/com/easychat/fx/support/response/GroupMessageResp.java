@@ -5,11 +5,6 @@ import com.easychat.fx.support.Command;
 import com.easychat.fx.support.Packet;
 import lombok.Data;
 
-/**
- * @author Zed
- * date: 2019/08/19.
- * description:
- */
 @Data
 public class GroupMessageResp extends Packet {
     /** 消息发送方*/

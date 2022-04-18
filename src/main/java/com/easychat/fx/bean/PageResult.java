@@ -6,8 +6,6 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author Zed
- * date: 2019/08/22.
  * description: 分页返回model
  */
 @Data

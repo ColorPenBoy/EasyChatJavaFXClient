@@ -6,11 +6,6 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-/**
- * @author Zed
- * date: 2019/08/20.
- * description:
- */
 @ChannelHandler.Sharable
 public class InviteGroupRespHandler extends SimpleChannelInboundHandler<InviteGroupResp> {
     private InviteGroupRespHandler() {}

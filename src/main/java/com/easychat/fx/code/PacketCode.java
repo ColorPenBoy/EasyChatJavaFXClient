@@ -9,11 +9,6 @@ import com.easychat.fx.support.request.*;
 import com.easychat.fx.support.response.*;
 import io.netty.buffer.ByteBuf;
 
-/**
- * @author Zed
- * date: 2019/08/19.
- * description:
- */
 public class PacketCode {
     
     public static final PacketCode INSTANCE = new PacketCode();

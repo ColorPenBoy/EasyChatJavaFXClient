@@ -7,11 +7,6 @@ import io.netty.channel.Channel;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author Zed
- * date: 2019/08/20.
- * description:
- */
 public class SessionUtil {
     private static Map<Long, Channel> userChannelMap = new ConcurrentHashMap<>();
     

@@ -10,11 +10,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * @author Zed
- * date: 2019/09/02.
- * description:
- */
 public class FileServiceImpl implements FileService {
 
     private static FileService ourInstance = new FileServiceImpl();

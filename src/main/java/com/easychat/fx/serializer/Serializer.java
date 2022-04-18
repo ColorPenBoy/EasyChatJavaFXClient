@@ -1,10 +1,5 @@
 package com.easychat.fx.serializer;
 
-/**
- * @author Zed
- * date: 2019/08/19.
- * description:
- */
 public interface Serializer {
     Serializer Default = new JsonSerializer();
     byte getSerializerAlgorithm();
