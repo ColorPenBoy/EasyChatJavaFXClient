@@ -49,23 +49,12 @@ public class Client extends Application {
                         //ch.pipeline().addLast(new IMIdleStateHandler());
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
-                        
                         ch.pipeline().addLast(LoginRespHandler.INSTANCE);
-                        ch.pipeline().addLast(MessageRespHandler.INSTANCE);
-                        ch.pipeline().addLast(AcceptGroupRespHandler.INSTANCE);
-                        ch.pipeline().addLast(AcceptRespHandler.INSTANCE);
-                        ch.pipeline().addLast(AddUserRespHandler.INSTANCE);
-                        ch.pipeline().addLast(AddUserSelfRespHandler.INSTANCE);
-                        ch.pipeline().addLast(CreateGroupRespHandler.INSTANCE);
-                        ch.pipeline().addLast(InviteGroupRespHandler.INSTANCE);
-                        ch.pipeline().addLast(InviteGroupSelfRespHandler.INSTANCE);
+                        ch.pipeline().addLast(GroupAddUserRespHandler.INSTANCE);
+                        ch.pipeline().addLast(GroupCreateRespHandler.INSTANCE);
                         ch.pipeline().addLast(GroupMessageRespHandler.INSTANCE);
-                        ch.pipeline().addLast(RegisterRespHandler.INSTANCE);
-                        ch.pipeline().addLast(UpdatePasswordRespHandler.INSTANCE);
-                        ch.pipeline().addLast(MessageSelfRespHandler.INSTANCE);
                         ch.pipeline().addLast(HeartBeatTimerHandler.INSTANCE);
                         ch.pipeline().addLast(HeartBeatRespHandler.INSTANCE);
-
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
@@ -122,20 +111,8 @@ public class Client extends Application {
     @Override
     public void start(Stage accept) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("accept.fxml"));
-        accept.setTitle("accept");
-        accept.setScene(new Scene(root));
-        Cache.ControllerMap.put("accept", accept);
-        accept.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Label label = (Label)accept.getScene().getRoot().lookup("#errorMsg");
-                label.setText(null);
-            }
-        });
-
         Stage createGroup = new Stage();
-        root = FXMLLoader.load(getClass().getClassLoader().getResource("createGroup.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("createGroup.fxml"));
         createGroup.setTitle("createGroup");
         createGroup.setScene(new Scene(root));
         Cache.ControllerMap.put("createGroup", createGroup);

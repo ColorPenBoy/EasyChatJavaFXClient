@@ -5,11 +5,6 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author: Zed
- * date: 2019/08/21.
- * description:
- */
 public class GroupUtil {
     private static Map<String, List<String>> groupMemberMap = new ConcurrentHashMap<>();
     private static Map<String, List<String>> invitegroupMemberMap = new ConcurrentHashMap<>();

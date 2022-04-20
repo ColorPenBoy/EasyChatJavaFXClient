@@ -1,10 +1,5 @@
 package com.easychat.fx.service.config;
 
-/**
- * @author: Zed
- * date: 2019/08/26.
- * description:
- */
 public interface ServerConf {
 //    String ip = "192.168.1.4";
 //    String port = "9004";

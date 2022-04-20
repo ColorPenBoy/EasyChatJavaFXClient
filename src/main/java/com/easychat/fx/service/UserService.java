@@ -13,11 +13,6 @@ import com.easychat.fx.service.config.ServerConf;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author: Zed
- * date: 2019/08/26.
- * description:
- */
 public class UserService {
     private static UserService ourInstance = new UserService();
 
@@ -63,18 +58,18 @@ public class UserService {
     }
     public List<Group> getGroupByUserId(Long userId, boolean newData) {
         Group group1 = new Group();
-        group1.setGroupId("1");
+        group1.setGroupId(1);
         group1.setGroupName("测试群1");
         group1.setMainUserId(1000000000L);
 
 
         Group group2 = new Group();
-        group2.setGroupId("2");
+        group2.setGroupId(2);
         group2.setGroupName("测试群2");
         group2.setMainUserId(1000000000L);
 
         Group group3 = new Group();
-        group3.setGroupId("3");
+        group3.setGroupId(3);
         group3.setGroupName("测试群3");
         group3.setMainUserId(1000000000L);
 

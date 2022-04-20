@@ -3,14 +3,9 @@ package com.easychat.fx.bean;
 import com.easychat.fx.controller.Cache;
 import lombok.Data;
 
-/**
- * @author: Zed
- * date: 2019/08/22.
- * description:
- */
 @Data
 public class Group {
-    private String groupId;
+    private Integer groupId;
     private String groupName;
     private Long mainUserId;
     

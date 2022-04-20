@@ -4,7 +4,7 @@ package com.easychat.fx.controller;
 import com.easychat.fx.bean.User;
 import com.easychat.fx.client.Client;
 import com.easychat.fx.util.DateUtils;
-import com.easychat.fx.support.request.CreateGroupReq;
+import com.easychat.fx.support.request.GroupCreateReq;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -29,7 +29,7 @@ public class CreateGroup extends AbstractController {
     }
 
     public void commit() {
-        CreateGroupReq req = new CreateGroupReq();
+        GroupCreateReq req = new GroupCreateReq();
         String text = textField.getText();
         if (text == null || "".equals(text)) {
             errorMsg.setText("请输入需要创建的群名");
@@ -37,13 +37,7 @@ public class CreateGroup extends AbstractController {
         }
         req.setGroupName(textField.getText());
         req.setDateTime(DateUtils.now());
-        ObservableList items = confirmView.getItems();
-        List<Long> users = new ArrayList<>();
-        for (Object obj : items) {
-            User user = (User) obj;
-            users.add(user.getUserId());
-        }
-        req.setUsers(users);
+
 
         Client.channelCache.writeAndFlush(req);
     }

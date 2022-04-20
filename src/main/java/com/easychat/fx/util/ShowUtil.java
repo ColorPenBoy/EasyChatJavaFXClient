@@ -12,11 +12,6 @@ import javafx.stage.Stage;
 
 import java.util.LinkedList;
 
-/**
- * @author: Zed
- * date: 2019/08/28.
- * description:
- */
 public class ShowUtil {
     public static void addSystemMessage(Packet msg) {
         LinkedList<Packet> packets = Cache.userMessageMap.computeIfAbsent(Cache.system.getUserId(), k -> new LinkedList<>());

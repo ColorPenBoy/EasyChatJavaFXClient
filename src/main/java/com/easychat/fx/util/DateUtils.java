@@ -4,11 +4,6 @@ package com.easychat.fx.util;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * @author: Zed
- * date: 2019/08/27.
- * description:
- */
 public class DateUtils {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
     private static final DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss");

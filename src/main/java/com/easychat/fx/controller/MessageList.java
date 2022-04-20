@@ -4,9 +4,7 @@ import com.easychat.fx.bean.*;
 import com.easychat.fx.service.MessageService;
 import com.easychat.fx.support.Packet;
 import com.easychat.fx.support.request.GroupMessageReq;
-import com.easychat.fx.support.request.MessageReq;
 import com.easychat.fx.support.response.GroupMessageResp;
-import com.easychat.fx.support.response.MessageResp;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -61,7 +59,7 @@ public class MessageList extends AbstractController {
         } else if (Constants.message_type_group.equals(messageType)){
             Group messageGroup = messageCache.getMessageGroup();
             lable.setText("与" + messageGroup.getGroupName() + "群聊的聊天记录");
-            user = messageGroup.getGroupId();
+            user = String.valueOf(messageGroup.getGroupId());
             userTpe = Constants.message_type_group;
         }
         service = MessageService.DEFAULT;
@@ -82,7 +80,7 @@ public class MessageList extends AbstractController {
         if (Constants.message_type_user.equals(userTpe)) {
             pageResult = service.getNextUserMessage(Long.parseLong(user), currentPage + 1, Constants.PAGESIZE);
         } else {
-            pageResult = service.getNextGroupMessage(user, currentPage + 1, Constants.PAGESIZE);
+            pageResult = service.getNextGroupMessage(Integer.parseInt(user), currentPage + 1, Constants.PAGESIZE);
         }
         setValues(pageResult);
     }
@@ -94,14 +92,7 @@ public class MessageList extends AbstractController {
         messageList.getItems().clear();
         if (pageResult.getRecords() != null && pageResult.getRecords().size() != 0) {
             for (Packet packet : pageResult.getRecords()) {
-                if (packet instanceof MessageReq) {
-                    MessageReq msg = (MessageReq) packet;
-                    String userName = Cache.currentUser.getUserName();
-                    Main.addItems(msg, messageList, msg.getMessageType(), msg.getMessage(), userName);
-                } else if (packet instanceof MessageResp) {
-                    MessageResp msg = (MessageResp) packet;
-                    Main.addItems(msg, messageList, msg.getMessageType(), msg.getMessage(), msg.getSenderName());
-                } else if (packet instanceof GroupMessageReq) {
+                if (packet instanceof GroupMessageReq) {
                     GroupMessageReq msg = (GroupMessageReq) packet;
                     String userName = Cache.currentUser.getUserName();
                     Main.addItems(msg, messageList, msg.getMessageType(), msg.getMessage(), userName);
@@ -128,7 +119,7 @@ public class MessageList extends AbstractController {
         if (Constants.message_type_user.equals(userTpe)) {
             pageResult = service.getNextUserMessage(Long.parseLong(user), currentPage - 1, Constants.PAGESIZE);
         } else {
-            pageResult = service.getNextGroupMessage(user, currentPage - 1, Constants.PAGESIZE);
+            pageResult = service.getNextGroupMessage(Integer.parseInt(user), currentPage - 1, Constants.PAGESIZE);
         }
         setValues(pageResult);
     }
@@ -142,7 +133,7 @@ public class MessageList extends AbstractController {
         if (Constants.message_type_user.equals(userTpe)) {
             pageResult = service.getEarliestUserMessage(Long.parseLong(user), Constants.PAGESIZE);
         } else {
-            pageResult = service.getEarliestGroupMessage(user, Constants.PAGESIZE);
+            pageResult = service.getEarliestGroupMessage(Integer.parseInt(user), Constants.PAGESIZE);
         }
         setValues(pageResult);
     }
@@ -156,7 +147,7 @@ public class MessageList extends AbstractController {
         if (Constants.message_type_user.equals(userTpe)) {
             pageResult = service.getLatestUserMessage(Long.parseLong(user), Constants.PAGESIZE);
         } else {
-            pageResult = service.getLatestGroupMessage(user, Constants.PAGESIZE);
+            pageResult = service.getLatestGroupMessage(Integer.parseInt(user), Constants.PAGESIZE);
         }
         setValues(pageResult);
     }

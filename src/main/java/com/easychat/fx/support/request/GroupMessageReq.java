@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class GroupMessageReq extends Packet {
     /** 消息接收方*/
-    private String groupId;
+    private Integer groupId;
     /** 消息内容*/
     private String message;
     /**

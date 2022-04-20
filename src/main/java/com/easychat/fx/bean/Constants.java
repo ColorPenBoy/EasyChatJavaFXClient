@@ -1,10 +1,5 @@
 package com.easychat.fx.bean;
 
-/**
- * @author: Zed
- * date: 2019/08/26.
- * description:
- */
 public interface Constants {
     String message_type_user = "message_type_user";
     String message_type_group = "message_type_group";

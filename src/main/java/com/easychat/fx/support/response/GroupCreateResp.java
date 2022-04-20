@@ -6,7 +6,7 @@ import com.easychat.fx.support.Packet;
 import lombok.Data;
 
 @Data
-public class CreateGroupResp extends Packet {
+public class GroupCreateResp extends Packet {
     /** 创建的群名*/
     private String groupName;
     /** 新增的群id*/
@@ -15,10 +15,12 @@ public class CreateGroupResp extends Packet {
     private boolean success;
     /** 创建失败的原因*/
     private String reason;
+
     @Override
     public byte getCommand() {
-        return Command.CREATE_GROUP_RESP;
+        return Command.GROUP_CREATE_RESP;
     }
+
     @Override
     public String toString() {
         if (success) {

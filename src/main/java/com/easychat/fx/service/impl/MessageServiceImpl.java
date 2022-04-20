@@ -101,10 +101,10 @@ public class MessageServiceImpl implements MessageService {
      * @return 返回消息记录
      */
     @Override
-    public PageResult<Packet> getLatestGroupMessage(String groupId, int pageSize) {
+    public PageResult<Packet> getLatestGroupMessage(Integer groupId, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
-        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(groupId), Constants.message_type_group);
+        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(String.valueOf(groupId)), Constants.message_type_group);
         int size = files.size();
         String s = files.get(size-1);
         File file = new File(s);
@@ -157,10 +157,10 @@ public class MessageServiceImpl implements MessageService {
      * @return 返回消息记录
      */
     @Override
-    public PageResult<Packet> getEarliestGroupMessage(String groupId, int pageSize) {
+    public PageResult<Packet> getEarliestGroupMessage(Integer groupId, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
-        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(groupId), Constants.message_type_group);
+        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(String.valueOf(groupId)), Constants.message_type_group);
         int size = files.size();
         String s = files.get(size-1);
         File file = new File(s);
@@ -213,10 +213,10 @@ public class MessageServiceImpl implements MessageService {
      * @return 返回消息记录
      */
     @Override
-    public PageResult<Packet> getLastGroupMessage(String groupId, int currentPage, int pageSize) {
+    public PageResult<Packet> getLastGroupMessage(Integer groupId, int currentPage, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
-        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(groupId), Constants.message_type_group);
+        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(String.valueOf(groupId)), Constants.message_type_group);
         int size = files.size();
         String s = files.get(size-1);
         File file = new File(s);
@@ -269,10 +269,10 @@ public class MessageServiceImpl implements MessageService {
      * @return 返回消息记录
      */
     @Override
-    public PageResult<Packet> getNextGroupMessage(String groupId, int currentPage, int pageSize) {
+    public PageResult<Packet> getNextGroupMessage(Integer groupId, int currentPage, int pageSize) {
         PageResult<Packet> pageResult = new PageResult<>();
         FileService service = FileService.DEFAULT;
-        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(groupId), Constants.message_type_group);
+        List<String> files = service.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(String.valueOf(groupId)), Constants.message_type_group);
         int size = files.size();
         String s = files.get(size-1);
         File file = new File(s);
@@ -307,8 +307,8 @@ public class MessageServiceImpl implements MessageService {
      * @param packet 消息体
      */
     @Override
-    public void writeGroupMessage(String groupId, Packet packet) {
-        List<String> files = FileService.DEFAULT.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(groupId), Constants.message_type_group);
+    public void writeGroupMessage(Integer groupId, Packet packet) {
+        List<String> files = FileService.DEFAULT.getUserMessageFiles(Cache.currentUser.getUserId(), Long.parseLong(String.valueOf(groupId)), Constants.message_type_group);
         String s = files.get(files.size()-1);
         FileService.DEFAULT.writeMessage(new File(s), JSON.toJSONString(packet));
     }

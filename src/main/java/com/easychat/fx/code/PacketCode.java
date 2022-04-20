@@ -63,44 +63,22 @@ public class PacketCode {
                 return LoginReq.class;
             case Command.LOGIN_RESP :
                 return LoginResp.class;
-            case Command.SEND_MESSAGE_RESP :
-                return MessageResp.class;
-            case Command.ADD_USER_REQ :
-                return AddUserReq.class;
-            case Command.ADD_USER_RESP :
-                return AddUserResp.class;
-            case Command.ADD_USER_SELF_RESP :
-                return AddUserSelfResp.class;
-            case Command.CREATE_GROUP_REQ :
-                return CreateGroupReq.class;
-            case Command.CREATE_GROUP_RESP :
-                return CreateGroupResp.class;
-            case Command.INVITE_GROUP_REQ :
-                return InviteGroupReq.class;
-            case Command.INVITE_GROUP_RESP :
-                return InviteGroupResp.class;
-            case Command.INVITE_GROUP_SELF_RESP :
-                return InviteGroupSelfResp.class;
+
+            case Command.GROUP_CREATE_REQ :
+                return GroupCreateReq.class;
+            case Command.GROUP_CREATE_RESP :
+                return GroupCreateResp.class;
+
+            case Command.GROUP_ADD_USER_REQ :
+                return GroupAddUserReq.class;
+            case Command.GROUP_ADD_USER_RESP:
+                return GroupAddUserResp.class;
+
             case Command.GROUP_MESSAGE_REQ :
                 return GroupMessageReq.class;
             case Command.GROUP_MESSAGE_RESP :
                 return GroupMessageResp.class;
-            case Command.ACCEPT_GROUP_REQ :
-                return AcceptGroupReq.class;
-            case Command.ACCEPT_GROUP_RESP :
-                return AcceptGroupResp.class;
-            case Command.ACCEPT_REQ :
-                return AcceptReq.class;
-            case Command.ACCEPT_RESP :
-                return AcceptResp.class;
-            case Command.REGISTER_REQ :
-                return RegisterReq.class;
-            case Command.REGISTER_RESP :
-                return RegisterResp.class;
-            case Command.UPDATE_PASSWD_REQ :
-                return UpdatePasswdReq.class;
-            case Command.UPDATE_PASSWD_RESP :
-                return UpdatePasswdResp.class;
+
             case Command.MESSAGE_SELF_RESP :
                 return MessageSelfResp.class;
             case Command.HEAT_BEAT_REQ :
@@ -108,7 +86,7 @@ public class PacketCode {
             case Command.HEAT_BEAT_RESP :
                 return HertBeatResp.class;
             default:
-                return MessageReq.class;
+                return HertBeatReq.class;
         }
     }
 

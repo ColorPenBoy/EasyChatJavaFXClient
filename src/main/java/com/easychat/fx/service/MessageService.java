@@ -22,7 +22,7 @@ public interface MessageService {
      * @param pageSize 一页的记录数          
      * @return 返回消息记录
      */
-    PageResult<Packet> getLatestGroupMessage(String groupId, int pageSize);
+    PageResult<Packet> getLatestGroupMessage(Integer groupId, int pageSize);
 
     /**
      * 根据用户id获取最早一页消息
@@ -38,7 +38,7 @@ public interface MessageService {
      * @param pageSize 一页的记录数                
      * @return 返回消息记录
      */
-    PageResult<Packet> getEarliestGroupMessage(String groupId, int pageSize);
+    PageResult<Packet> getEarliestGroupMessage(Integer groupId, int pageSize);
 
     /**
      * 根据用户id获取上一页消息
@@ -56,7 +56,7 @@ public interface MessageService {
      * @param pageSize 一页的记录数
      * @return 返回消息记录
      */
-    PageResult<Packet> getLastGroupMessage(String groupId, int currentPage, int pageSize);
+    PageResult<Packet> getLastGroupMessage(Integer groupId, int currentPage, int pageSize);
 
     /**
      * 根据用户id获取下一页消息
@@ -74,7 +74,7 @@ public interface MessageService {
      * @param pageSize 一页的记录数
      * @return 返回消息记录
      */
-    PageResult<Packet> getNextGroupMessage(String groupId, int currentPage, int pageSize);
+    PageResult<Packet> getNextGroupMessage(Integer groupId, int currentPage, int pageSize);
 
     /**
      * 写入消息到用户本地记录
@@ -88,7 +88,7 @@ public interface MessageService {
      * @param groupId 群组id
      * @param packet 消息体
      */
-    void writeGroupMessage(String groupId, Packet packet);
+    void writeGroupMessage(Integer groupId, Packet packet);
 
 
     /**

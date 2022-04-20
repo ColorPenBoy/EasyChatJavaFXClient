@@ -12,7 +12,7 @@ public class GroupMessageResp extends Packet {
     /** 消息发送人姓名*/
     private String senderName;
     /** 消息接收方*/
-    private String groupId;
+    private Integer groupId;
     /** 消息内容*/
     private String message;
     /**

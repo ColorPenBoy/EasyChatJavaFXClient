@@ -5,11 +5,6 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author: Zed
- * date: 2019/08/21.
- * description:
- */
 public class FriendUtil {
     private static Map<String, List<String>> friendMap = new ConcurrentHashMap<>();
     private static Map<String, List<String>> invitefriendMap = new ConcurrentHashMap<>();

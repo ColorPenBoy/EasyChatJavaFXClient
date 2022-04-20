@@ -3,7 +3,6 @@ package com.easychat.fx.controller;
 import com.easychat.fx.client.Client;
 import com.easychat.fx.util.DateUtils;
 import com.easychat.fx.support.request.LoginReq;
-import com.easychat.fx.support.request.RegisterReq;
 import io.netty.channel.Channel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

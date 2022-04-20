@@ -14,10 +14,10 @@ public interface Cache {
     Map<String, Stage> ControllerMap = new HashMap<>();
     
     Map<Long, LinkedList<Packet>> userMessageMap = new HashMap<>();
-    Map<String, LinkedList<Packet>> groupMessageMap = new HashMap<>();
+    Map<Integer, LinkedList<Packet>> groupMessageMap = new HashMap<>();
 
     Map<Long, Integer> userMessageNumMap = new HashMap<>();
-    Map<String, Integer> groupMessageNumMap = new HashMap<>();
+    Map<Integer, Integer> groupMessageNumMap = new HashMap<>();
     AtomicInteger allMessageNum = new AtomicInteger(0);
 
     User currentUser = new User();

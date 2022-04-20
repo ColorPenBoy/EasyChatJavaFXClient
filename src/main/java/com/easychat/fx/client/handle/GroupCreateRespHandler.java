@@ -4,7 +4,7 @@ import com.easychat.fx.bean.Constants;
 import com.easychat.fx.controller.Cache;
 import com.easychat.fx.controller.Main;
 import com.easychat.fx.support.UiBaseService;
-import com.easychat.fx.support.response.CreateGroupResp;
+import com.easychat.fx.support.response.GroupCreateResp;
 import com.easychat.fx.util.ShowUtil;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,11 +12,11 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import javafx.stage.Stage;
 
 @ChannelHandler.Sharable
-public class CreateGroupRespHandler extends SimpleChannelInboundHandler<CreateGroupResp> {
-    private CreateGroupRespHandler() {}
-    public static CreateGroupRespHandler INSTANCE = new CreateGroupRespHandler();
+public class GroupCreateRespHandler extends SimpleChannelInboundHandler<GroupCreateResp> {
+    private GroupCreateRespHandler() {}
+    public static GroupCreateRespHandler INSTANCE = new GroupCreateRespHandler();
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, CreateGroupResp msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, GroupCreateResp msg) throws Exception {
         Stage createGroup = Cache.ControllerMap.get("createGroup");
         ShowUtil.addSystemMessage(msg);
         if (msg.isSuccess()) {

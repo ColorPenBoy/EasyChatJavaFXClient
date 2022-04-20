@@ -5,6 +5,7 @@ import com.easychat.fx.bean.Group;
 import com.easychat.fx.bean.MessageCache;
 import com.easychat.fx.bean.User;
 import com.easychat.fx.client.Client;
+import com.easychat.fx.support.response.GroupAddUserResp;
 import com.easychat.fx.util.AES;
 import com.easychat.fx.util.DateUtils;
 import com.easychat.fx.service.ImageService;
@@ -13,11 +14,7 @@ import com.easychat.fx.service.UserService;
 import com.easychat.fx.support.Packet;
 import com.easychat.fx.support.UiBaseService;
 import com.easychat.fx.support.request.GroupMessageReq;
-import com.easychat.fx.support.request.MessageReq;
-import com.easychat.fx.support.response.AddUserResp;
 import com.easychat.fx.support.response.GroupMessageResp;
-import com.easychat.fx.support.response.InviteGroupResp;
-import com.easychat.fx.support.response.MessageResp;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +39,7 @@ public class Main extends AbstractController {
     private static KeyCode pasteLast = null;
     private static KeyCode pasteLast1 = null;
     private static KeyCode inputLast2 = null;
+
     @FXML
     private ListView userListView;
     @FXML
@@ -66,7 +64,9 @@ public class Main extends AbstractController {
     private Label remind2;
     @FXML
     private Label messageNum;
+
     private TextArea textArea1;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         errorMsg.setTextFill(Color.RED);
@@ -86,7 +86,6 @@ public class Main extends AbstractController {
         textArea1 = new TextArea();
         items.add(textArea1);
         addListen();
-
 
         textArea.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             KeyCode last = isMac ? KeyCode.COMMAND : KeyCode.CONTROL;
@@ -113,7 +112,6 @@ public class Main extends AbstractController {
             }
             pasteLast = event.getCode();
         });
-
         textArea.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (textArea.getItems().get(0) instanceof TextArea) {
                 return;
@@ -134,14 +132,12 @@ public class Main extends AbstractController {
             }
             inputLast2 = event.getCode();
         });
-
         textArea.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (inputLast == KeyCode.CONTROL && KeyCode.ENTER == event.getCode()) {
                 sendMessage();
             }
             inputLast = event.getCode();
         });
-
         textArea.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (KeyCode.BACK_SPACE == event.getCode()) {
                 Object o = items.get(0);
@@ -209,8 +205,6 @@ public class Main extends AbstractController {
 
         //messageitems.add(Cache.currentUser.getUserName() + " " + DateUtils.convertShowTime(now) + ": \n    " + text);
 
-
-
         //将消息发送出去记录到缓存
         String messageType = Cache.messageCache.getMessageType();
         Packet packet;
@@ -223,16 +217,16 @@ public class Main extends AbstractController {
                 addListen();
                 return;
             }
-            MessageReq req = new MessageReq();
-            req.setReceiver(messageUser.getUserId());
-            req.setMessage(AES.encrypt(text, now + "ab"));
-            req.setMessageType(inputMessageType);
-            req.setDateTime(now);
-            addItems(req, messageListView, inputMessageType, req.getMessage(), Cache.currentUser.getUserName());
-            Client.channelCache.writeAndFlush(req);
-            LinkedList<Packet> packets = Cache.userMessageMap.computeIfAbsent(messageUser.getUserId(), k -> new LinkedList<>());
-            packets.add(req);
-            MessageService.DEFAULT.writeUserMessage(messageUser.getUserId(), req);
+//            MessageReq req = new MessageReq();
+//            req.setReceiver(messageUser.getUserId());
+//            req.setMessage(AES.encrypt(text, now + "ab"));
+//            req.setMessageType(inputMessageType);
+//            req.setDateTime(now);
+//            addItems(req, messageListView, inputMessageType, req.getMessage(), Cache.currentUser.getUserName());
+//            Client.channelCache.writeAndFlush(req);
+//            LinkedList<Packet> packets = Cache.userMessageMap.computeIfAbsent(messageUser.getUserId(), k -> new LinkedList<>());
+//            packets.add(req);
+//            MessageService.DEFAULT.writeUserMessage(messageUser.getUserId(), req);
             
         } else {
             Group group = Cache.messageCache.getMessageGroup();
@@ -255,15 +249,11 @@ public class Main extends AbstractController {
             MessageService.DEFAULT.writeGroupMessage(group.getGroupId(), req);
         }
 
-
-        
-        
         textArea.getItems().clear();
         textArea1 = new TextArea();
         items.add(textArea1);
         textArea1.requestFocus();
         addListen();
-
     }
 
 //    public void showGroupList() {
@@ -408,7 +398,7 @@ public class Main extends AbstractController {
                 Cache.allMessageNum.getAndAdd(-num);
             }
             Cache.groupMessageNumMap.remove(group.getGroupId());
-            showMessageViesList(messageListView, group.getGroupId(), Constants.message_type_group);
+            showMessageViesList(messageListView, String.valueOf(group.getGroupId()), Constants.message_type_group);
             showUserGroupList(Constants.message_type_group);
 
         } else {
@@ -431,16 +421,20 @@ public class Main extends AbstractController {
         
         if (Cache.system.getUserId().equals(Cache.messageCache.getMessageUser().getUserId())) {
             Object packet = messageListView.getItems().get(selectedIndex);
-            if (packet instanceof AddUserResp) {
-                AddUserResp userResp = (AddUserResp) packet;
-                Cache.acceptCache.setSenderId(userResp.getInviterId());
+            if (packet instanceof GroupAddUserResp) {
+                GroupAddUserResp userResp = (GroupAddUserResp) packet;
+                Cache.acceptCache.setSenderId(String.valueOf(userResp.getUserId()));
                 Cache.acceptCache.setDateTime(userResp.getDateTime());
-            } else if (packet instanceof InviteGroupResp) {
-                InviteGroupResp inviteGroupResp = (InviteGroupResp) packet;
-                Cache.acceptCache.setSenderId(inviteGroupResp.getInviteId());
-                Cache.acceptCache.setDateTime(inviteGroupResp.getDateTime());
-                Cache.acceptCache.setGroupId(inviteGroupResp.getGroupId());
-            } else {
+            }
+
+//            else if (packet instanceof InviteGroupResp) {
+//                InviteGroupResp inviteGroupResp = (InviteGroupResp) packet;
+//                Cache.acceptCache.setSenderId(inviteGroupResp.getInviteId());
+//                Cache.acceptCache.setDateTime(inviteGroupResp.getDateTime());
+//                Cache.acceptCache.setGroupId(inviteGroupResp.getGroupId());
+//            }
+
+            else {
                 return;
             }
 
@@ -475,7 +469,7 @@ public class Main extends AbstractController {
             if (packets.size() == 0) {
                 packets.addAll(MessageService.DEFAULT.getLastUserCacheMessage(Long.parseLong(id), Constants.CACHE_PAGESIZE));
                 if (packets.size() != 0) {
-                    Cache.groupMessageMap.put(id, packets);
+                    Cache.groupMessageMap.put(Integer.parseInt(id), packets);
                 }
             }
         }
@@ -485,14 +479,7 @@ public class Main extends AbstractController {
             if (packets.size()!=0) {
                 packets.sort(Comparator.comparing(Packet::getDateTime));
                 for (Packet packet : packets) {
-                    if (packet instanceof MessageReq ) {
-                        MessageReq msg = (MessageReq) packet;
-                        String userName = Cache.currentUser.getUserName();
-                        addItems(msg, messageListView, msg.getMessageType(), msg.getMessage(), userName);
-                    } else if (packet instanceof MessageResp) {
-                        MessageResp msg = (MessageResp) packet;
-                        addItems(msg, messageListView, msg.getMessageType(), msg.getMessage(), msg.getSenderName());
-                    } else if (packet instanceof GroupMessageReq) {
+                    if (packet instanceof GroupMessageReq) {
                         GroupMessageReq msg = (GroupMessageReq) packet;
                         String userName = Cache.currentUser.getUserName();
                         addItems(msg, messageListView, msg.getMessageType(), msg.getMessage(), userName);

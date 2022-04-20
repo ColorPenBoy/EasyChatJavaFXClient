@@ -7,11 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author: Zed
- * date: 2019/08/26.
- * description:
- */
 public class OkHttpUtils {
     private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .connectionPool(new ConnectionPool(20,
