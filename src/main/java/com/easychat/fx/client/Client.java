@@ -120,14 +120,17 @@ public class Client extends Application {
             @Override
             public void handle(WindowEvent event) {
                 Label label = (Label)createGroup.getScene().getRoot().lookup("#errorMsg");
-                TextField textField = (TextField)createGroup.getScene().getRoot().lookup("#textField");
-                ListView selectView = (ListView)createGroup.getScene().getRoot().lookup("#selectView");
-                ListView confirmView = (ListView)createGroup.getScene().getRoot().lookup("#confirmView");
-                
                 label.setText(null);
-                textField.setText(null);
-                selectView.getItems().clear();
-                confirmView.getItems().clear();
+
+                TextField groupNameTextField = (TextField)createGroup.getScene().getRoot().lookup("#groupNameTextField");
+                groupNameTextField.setText(null);
+
+                TextField carVersionTextField = (TextField)createGroup.getScene().getRoot().lookup("#carVersionTextField");
+                carVersionTextField.setText(null);
+
+                TextField groupTypeTextField = (TextField)createGroup.getScene().getRoot().lookup("#groupTypeTextField");
+                groupTypeTextField.setText(null);
+
             }
         });
 
@@ -141,13 +144,9 @@ public class Client extends Application {
             public void handle(WindowEvent event) {
                 Label label = (Label)inviteGroup.getScene().getRoot().lookup("#errorMsg");
                 ChoiceBox choiceBox = (ChoiceBox)inviteGroup.getScene().getRoot().lookup("#choiceBox");
-                ListView selectView = (ListView)createGroup.getScene().getRoot().lookup("#selectView");
-                ListView confirmView = (ListView)createGroup.getScene().getRoot().lookup("#confirmView");
-                
+
                 label.setText(null);
                 label.setText(null);
-                selectView.getItems().clear();
-                confirmView.getItems().clear();
                 choiceBox.getItems().clear();
             }
         });

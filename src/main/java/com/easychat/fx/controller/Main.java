@@ -344,10 +344,6 @@ public class Main extends AbstractController {
         errorMsg.setText("");
         UiBaseService.INSTANCE.runTaskInFxThread(()->{
             Stage createGroup = Cache.ControllerMap.get("createGroup");
-            ListView selectView = (ListView) createGroup.getScene().getRoot().lookup("#selectView");
-            List<User> users = UserService.getInstance().getFriendByUserId(Cache.currentUser.getUserId());
-            selectView.getItems().clear();
-            selectView.getItems().addAll(users);
             createGroup.show();
             createGroup.toFront();
         });
