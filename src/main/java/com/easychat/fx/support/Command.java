@@ -11,11 +11,11 @@ public interface Command {
     byte GROUP_ADD_USER_REQ = 12;
     byte GROUP_ADD_USER_RESP = 13;
 
-    byte GROUP_MESSAGE_REQ = 15;
-    byte GROUP_MESSAGE_RESP = 16;
+    byte MESSAGE_SELF_RESP = 20;
 
-    byte MESSAGE_SELF_RESP = 25;
+    byte GROUP_MESSAGE_REQ = 21;
+    byte GROUP_MESSAGE_RESP = 22;
 
-    byte HEAT_BEAT_REQ = 26;
-    byte HEAT_BEAT_RESP = 27;
+    byte HEAT_BEAT_REQ = 30;
+    byte HEAT_BEAT_RESP = 31;
 }
